@@ -1,0 +1,15 @@
+# Render Deployment Blueprint Configuration
+# This file allows Render to automatically detect and configure your microservice.
+
+services:
+  - type: web
+    name: sosvzla-api
+    env: go
+    plan: free # Can be 'free' or other Render plan tiers
+    buildCommand: go build -tags netgo -ldflags '-s -w' -o app cmd/main.go
+    startCommand: ./app
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false # Set this value manually in Render Dashboard under environment variables

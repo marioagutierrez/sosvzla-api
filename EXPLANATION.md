@@ -43,3 +43,9 @@ Para interactuar con la base de datos, utilizamos un patrón de diseño llamado 
 - **Go:** Es el lenguaje de programación en el que está escrito el microservicio.
 - **PostgreSQL:** Es la base de datos que se usa para guardar la información. La conexión con esta base de datos se realiza mediante un formato estándar llamado **Connection String** (URL de conexión), que agrupa todos los parámetros (usuario, contraseña, host, puerto, nombre de base de datos) en una sola cadena de texto (`postgres://...`). Esto facilita la configuración en entornos locales y servicios en la nube.
 - **Swagger:** Es una herramienta que se usa para documentar la API, para que otros programadores puedan entender cómo usarla.
+
+## Despliegue en Render
+
+Para facilitar la publicación y despliegue del microservicio en internet usando **Render**, creamos un archivo llamado `render.yaml`. Este archivo es un Blueprint (plantilla) que le dice a Render exactamente cómo configurar, compilar e iniciar la aplicación:
+- **Comando de compilación corregido:** Por defecto, Render intenta compilar buscando archivos en la carpeta raíz. Dado que organizamos el código limpiamente con el punto de entrada en `cmd/main.go`, configuramos a Render para compilar explícitamente ese archivo (`go build ... cmd/main.go`), evitando fallos por "archivos Go no encontrados".
+- **Variables de entorno:** Configura el puerto por defecto (`8080`) y define el espacio para colocar la conexión segura a la base de datos de PostgreSQL en producción (`DATABASE_URL`).

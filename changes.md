@@ -35,4 +35,7 @@
 - **MODIFICAR:** Traducción y actualización de `README.md`.
     - **Propósito:** Ofrecer la documentación completa de inicio rápido, configuración, detalles de API y endpoints en español, y configurar el perfil de autor correcto en GitHub.
     - **Lógica:** Se reescribió `README.md` enteramente en español y se vinculó la cuenta de GitHub de Mario Gutiérrez (`https://github.com/marioagutierrez`) como autor principal del repositorio.
+- **CREAR:** Archivo de configuración para despliegues en Render `render.yaml`.
+    - **Propósito:** Corregir el fallo de compilación en Render (`no Go files in ...`) causado por la ausencia de archivos Go en la raíz del repositorio, especificando de forma explícita la ruta al punto de entrada.
+    - **Lógica:** Se configuró un Blueprint de Render en `render.yaml` especificando el comando de compilación explícito `go build -tags netgo -ldflags '-s -w' -o app cmd/main.go` y el comando de inicio `./app` con las variables de entorno asociadas.
 
