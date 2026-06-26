@@ -45,11 +45,11 @@ psql -u tu_usuario -d tu_base_de_datos -f build/database.sql
    ```
 2. Compila el microservicio para comprobar que todo esté correcto:
    ```bash
-   go build -o build/main cmd/main.go
+   go build -o build/main main.go
    ```
 3. Ejecuta el servidor de desarrollo:
    ```bash
-   go run cmd/main.go
+   go run main.go
    ```
 
 El servidor iniciará por defecto en el puerto `8080`.
@@ -89,7 +89,7 @@ Cuando el servicio esté en ejecución, puedes acceder a la interfaz interactiva
 Si realizas modificaciones en los endpoints o estructuras de datos y deseas actualizar la especificación de Swagger, puedes regenerarla utilizando la herramienta de Swag:
 
 ```bash
-go run github.com/swaggo/swag/cmd/swag init -g cmd/main.go
+go run github.com/swaggo/swag/cmd/swag init -g main.go
 ```
 
 ## Autor

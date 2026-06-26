@@ -46,6 +46,8 @@ Para interactuar con la base de datos, utilizamos un patrón de diseño llamado 
 
 ## Despliegue en Render
 
-Para facilitar la publicación y despliegue del microservicio en internet usando **Render**, creamos un archivo llamado `render.yaml`. Este archivo es un Blueprint (plantilla) que le dice a Render exactamente cómo configurar, compilar e iniciar la aplicación:
-- **Comando de compilación corregido:** Por defecto, Render intenta compilar buscando archivos en la carpeta raíz. Dado que organizamos el código limpiamente con el punto de entrada en `cmd/main.go`, configuramos a Render para compilar explícitamente ese archivo (`go build ... cmd/main.go`), evitando fallos por "archivos Go no encontrados".
+Para facilitar la publicación y despliegue del microservicio en internet usando **Render**, creamos un archivo llamado `render.yaml`. Este archivo es un Blueprint (plantilla) que le dice a Render exactamente cómo configurar, compilar e iniciar la aplicación.
+
+Adicionalmente, para dar soporte **plug-and-play absoluto** (para que funcione de forma inmediata utilizando el comando predeterminado e inalterable de Render sin necesidad de cambiar nada manualmente en su interfaz), trasladamos el archivo principal de arranque de `cmd/main.go` a la raíz del repositorio (`./main.go`):
+- **Resolución definitiva de error:** Al colocar `main.go` en la raíz del proyecto, el comando predeterminado de Render (`go build -tags netgo -ldflags '-s -w' -o app`) encuentra el código al instante, lo compila exitosamente, genera el binario `./app` y lo arranca sin fallar con errores de "archivos de Go no encontrados".
 - **Variables de entorno:** Configura el puerto por defecto (`8080`) y define el espacio para colocar la conexión segura a la base de datos de PostgreSQL en producción (`DATABASE_URL`).

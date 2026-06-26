@@ -37,5 +37,8 @@
     - **Lógica:** Se reescribió `README.md` enteramente en español y se vinculó la cuenta de GitHub de Mario Gutiérrez (`https://github.com/marioagutierrez`) como autor principal del repositorio.
 - **CREAR:** Archivo de configuración para despliegues en Render `render.yaml`.
     - **Propósito:** Corregir el fallo de compilación en Render (`no Go files in ...`) causado por la ausencia de archivos Go en la raíz del repositorio, especificando de forma explícita la ruta al punto de entrada.
-    - **Lógica:** Se configuró un Blueprint de Render en `render.yaml` especificando el comando de compilación explícito `go build -tags netgo -ldflags '-s -w' -o app cmd/main.go` y el comando de inicio `./app` con las variables de entorno asociadas.
+    - **Lógica:** Se configuró un Blueprint de Render en `render.yaml` especificando el comando de compilación explícito `go build -tags netgo -ldflags '-s -w' -o app main.go` y el comando de inicio `./app` con las variables de entorno asociadas.
+- **MOVER:** Traslado del punto de entrada `main.go` al directorio raíz del proyecto.
+    - **Propósito:** Ofrecer compatibilidad "plug-and-play" absoluta con el comando de compilación por defecto de Render (`go build ...` sin argumentos adicionales), solucionando de forma infalible el error de compilación.
+    - **Lógica:** Se trasladó `cmd/main.go` a `./main.go` y se eliminó el subdirectorio `cmd`, alineando los comandos de compilación y ejecución estándar con la nueva ruta raíz.
 
